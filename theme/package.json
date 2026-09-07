@@ -16,6 +16,7 @@
     },
     "author": {
         "name": "sjk",
+        "email": "2090953265@qq.com",
         "url": "https://github.com/daodaoq/oss-blog"
     },
     "gpm": {
@@ -59,6 +60,33 @@
                     "Auto"
                 ],
                 "default": "Light"
+            },
+            "title_font": {
+                "type": "select",
+                "options": [
+                    "Modern sans-serif",
+                    "Elegant serif"
+                ],
+                "default": "Elegant serif"
+            },
+            "body_font": {
+                "type": "select",
+                "options": [
+                    "Modern sans-serif",
+                    "Elegant serif"
+                ],
+                "default": "Elegant serif"
+            },
+            "post_image_style": {
+                "type": "select",
+                "options": [
+                    "Wide",
+                    "Full",
+                    "Small",
+                    "Hidden"
+                ],
+                "default": "Wide",
+                "group": "post"
             },
             "feed_layout": {
                 "type": "select",

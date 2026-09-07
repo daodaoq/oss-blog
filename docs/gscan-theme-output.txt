@@ -1,0 +1,7 @@
+
+Checking theme compatibility...
+
+✓ Your theme is compatible with Ghost 6.x
+
+Get more help at https://docs.ghost.org/themes/
+You can also check theme compatibility at https://gscan.ghost.org/
