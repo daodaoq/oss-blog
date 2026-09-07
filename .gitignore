@@ -1,0 +1,32 @@
+# ---- 依赖 ----
+node_modules/
+
+# ---- Ghost 运行时（本地实例不提交，正文见 docs/）----
+runtime/node_modules/
+runtime/content/
+runtime/current
+runtime/.ghost-cli*
+runtime/.ghost/
+runtime/config.development.json
+runtime/config.production.json
+
+# ---- 敏感信息：数据库 / 密钥 / token 严禁提交 ----
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+.env
+.env.*
+*.key
+*.pem
+
+# ---- 日志与临时文件 ----
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+*.tmp
+
+# ---- 主题构建产物（保留源码与可安装包在 dist）----
+theme/node_modules/
+theme/.cache/
