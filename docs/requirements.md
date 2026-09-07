@@ -28,13 +28,14 @@
 
 | 组件 | 版本 | 说明 |
 |---|---|---|
-| Ghost（基线应用） | `6.62.0` | 以 runtime 内实际安装为准，启动后以 `package.json` 锁定 |
-| Node.js | `v22.x` | 满足 Ghost 6 运行要求 |
-| npm | `10.x` | 随 Node 提供 |
-| 数据库 | SQLite（本地默认） | 零配置，便于个人实验与备份恢复演示 |
-| 运行方式 | `ghost install local` | 遵循实验 PDF 指定流程 |
+| Ghost（基线应用） | `6.62.0` | 镜像 `ghost:6.62.0`（容器内 `current/package.json` 实测确认） |
+| Node.js | `v22.x`（宿主/镜像内 LTS） | 满足 Ghost 6 要求 |
+| 数据库 | SQLite（`content/data/ghost.db`） | 零配置，便于个人实验与备份恢复演示 |
+| 运行方式 | **Docker Compose**（`runtime/docker-compose.yml`） | Ghost 官方镜像 + Mailpit 本地收信；`docker compose up -d` 一键起停 |
+| 邮件 | Mailpit（SMTP 1025 / Web 8025） | 本地接收会员注册/登录验证邮件，magic link 可离线获取 |
 
-> 规则：主分支 main 始终对应当前锁定版本；后续版本变更必须新建分支并记录变更原因。
+> 环境结论：Ghost **官方不支持原生 Windows**（依赖 native 模块编译需 VS 工具链，实测安装失败）。本机采用 Docker 方案，符合 Ghost 官方对 Windows 的推荐做法，并让 README 在“全新电脑”上可一键复现。
+> 规则：主分支 main 始终对应当前锁定版本 `6.62.0`；后续版本变更必须新建分支并记录变更原因。
 
 ## 4. 六条验收场景（Acceptance Scenarios）
 

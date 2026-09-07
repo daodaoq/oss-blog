@@ -1,14 +1,16 @@
 # ---- 依赖 ----
 node_modules/
 
-# ---- Ghost 运行时（本地实例不提交，正文见 docs/）----
-runtime/node_modules/
+# ---- Ghost 运行时（Docker 数据目录与数据库不提交，正文见 docs/）----
 runtime/content/
+runtime/versions/
+runtime/node_modules/
 runtime/current
 runtime/.ghost-cli*
 runtime/.ghost/
 runtime/config.development.json
 runtime/config.production.json
+runtime/.pnpm-store/
 
 # ---- 敏感信息：数据库 / 密钥 / token 严禁提交 ----
 *.db
@@ -26,6 +28,11 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 *.tmp
+
+# ---- 本地会话/密钥痕迹（严禁提交）----
+runtime/.admin.cookies
+runtime/.ghost-cli*
+*.cookies
 
 # ---- 主题构建产物（保留源码与可安装包在 dist）----
 theme/node_modules/

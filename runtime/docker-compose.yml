@@ -1,0 +1,51 @@
+# oss-blog · Ghost 6 本地运行（Docker Compose）
+# 用法：cd runtime && docker compose up -d
+# 前台 http://localhost:2368  后台 http://localhost:2368/ghost
+#
+# 说明：
+#  - 数据/主题/上传文件全部落在 ./content（已 gitignore），容器可随时删除重建而不丢数据。
+#  - 固定 Ghost 版本镜像 ghost:6.62.0。
+#  - 需要把自定义主题放入 content/themes/<theme-name>/ 后重启并激活。
+name: oss-blog-ghost
+
+services:
+  ghost:
+    image: ghost:6.62.0
+    container_name: oss-blog-ghost
+    restart: unless-stopped
+    depends_on:
+      - mailpit
+    ports:
+      - "2368:2368"
+    environment:
+      # 站点对外 URL（本地开发直接映射 localhost）
+      url: http://localhost:2368
+      # 本地使用 SQLite，数据库文件存于挂载卷 content/data/ghost.db
+      database__client: sqlite3
+      database__connection__filename: content/data/ghost.db
+      database__useNullAsDefault: "true"
+      # 邮件：本地无真实 SMTP，转发到 Mailpit(容器 1025)，
+      # 会员 magic link 可从 http://localhost:8025 读取/截图，保证离线可演示
+      mail__transport: smtp
+      mail__options__host: mailpit
+      mail__options__port: "1025"
+      mail__options__secure: "false"
+      mail__from: "sjk 的开源博客 <ghost@localhost.local>"
+      NODE_ENV: development
+    volumes:
+      - ./content:/var/lib/ghost/content
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:2368/ghost/api/admin/site/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  # 本地邮件接收器：SMTP :1025，Web/API 界面 :8025
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: oss-blog-mailpit
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
