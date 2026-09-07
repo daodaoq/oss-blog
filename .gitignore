@@ -33,7 +33,10 @@ Thumbs.db
 runtime/.admin.cookies
 runtime/.ghost-cli*
 *.cookies
+runtime/mail/
 
 # ---- 主题构建产物（保留源码与可安装包在 dist）----
 theme/node_modules/
 theme/.cache/
+runtime/.admin.env
+runtime/ghost-keys.env

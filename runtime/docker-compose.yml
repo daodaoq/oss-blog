@@ -14,7 +14,7 @@ services:
     container_name: oss-blog-ghost
     restart: unless-stopped
     depends_on:
-      - mailpit
+      - mail-sink
     ports:
       - "2368:2368"
     environment:
@@ -24,10 +24,12 @@ services:
       database__client: sqlite3
       database__connection__filename: content/data/ghost.db
       database__useNullAsDefault: "true"
-      # 邮件：本地无真实 SMTP，转发到 Mailpit(容器 1025)，
-      # 会员 magic link 可从 http://localhost:8025 读取/截图，保证离线可演示
+      # 本地关闭 staff 设备验证邮件 OTP，管理员直接用密码登录（仅本地开发）
+      security__staffDeviceVerification: "false"
+      # 邮件：转发到本地 mail-sink(SMTP :1025)，收到的 .eml 落盘 runtime/mail/，
+      # 会员 magic link / 验证码可离线读取，保证演示与脚本自动化可复现
       mail__transport: smtp
-      mail__options__host: mailpit
+      mail__options__host: mail-sink
       mail__options__port: "1025"
       mail__options__secure: "false"
       mail__from: "sjk 的开源博客 <ghost@localhost.local>"
@@ -41,11 +43,11 @@ services:
       retries: 12
       start_period: 30s
 
-  # 本地邮件接收器：SMTP :1025，Web/API 界面 :8025
-  mailpit:
-    image: axllent/mailpit:latest
-    container_name: oss-blog-mailpit
+  # 本地邮件接收器：极简 SMTP sink（自建镜像，无需第三方网络，构建自 docker/Dockerfile）
+  mail-sink:
+    build: ./mail-sink
+    image: oss-blog-mail-sink:local
+    container_name: oss-blog-mail-sink
     restart: unless-stopped
-    ports:
-      - "1025:1025"
-      - "8025:8025"
+    volumes:
+      - ./mail:/mail
