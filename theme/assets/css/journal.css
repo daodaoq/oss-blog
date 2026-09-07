@@ -406,6 +406,39 @@ body {
 }
 
 /* ============================================================
+   面包屑（自研详情页组件）
+   ============================================================ */
+.mz-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-size: 13px;
+    color: var(--j-muted);
+    padding-top: 34px;
+    margin-bottom: -10px;
+}
+
+.mz-breadcrumb a {
+    color: var(--j-ink-soft);
+    text-decoration: none;
+}
+
+.mz-breadcrumb a:hover {
+    color: var(--j-accent);
+    text-decoration: underline;
+}
+
+.mz-breadcrumb .sep {
+    color: #c6c0b6;
+}
+
+.mz-breadcrumb .cur {
+    color: var(--j-ink);
+    font-weight: 600;
+}
+
+/* ============================================================
    正文文章（覆盖 Casper 排版细节，更"杂志"）
    ============================================================ */
 .gh-content {

@@ -51,14 +51,24 @@
 | # | 用例 | 步骤 | 期望 | 实际 |
 |---|---|---|---|---|
 | R1 | 服务重启数据不丢 | `docker compose restart ghost` | 文章/评论仍在 | PASS（9 篇重启前后不变） |
-| R2 | 导出→重建→导入恢复 | Admin 导出 db → 清库重建容器 → 导入 | 数据完整恢复 | 待执行（导出已可做，见下） |
+| R2 | 导出→重建→导入恢复 | Admin 导出 db → 清库重建容器 → 导入 | 文章/标签/设置恢复 | 待执行（导出已做：`runtime/backups/ghost-export-*.json` + 脱敏样例 `tests/fixtures/ghost-export-sample.json`） |
+
+> 说明：Ghost Admin 导出 **不包含** members/评论（隐私设计，实测导出表仅有 posts/tags/settings 等）。
+> 因此会员与评论的完整恢复走**整库文件备份**：备份/恢复 `runtime/content/data/ghost.db`（见 README「数据备份恢复」），
+> Admin 导出/导入负责内容(文章/标签/设置)的跨库迁移。
 
 恢复命令（任务8 前执行并存档）：
 ```bash
-# 导出
+# ① 内容导出（文章/标签/设置）
 curl -b runtime/.admin.cookies -H "Origin: http://localhost:2368" \
   http://localhost:2368/ghost/api/admin/db/ > runtime/backups/ghost-export.json
-# 清库恢复演示：docker compose down -v 后 up，再用 Admin 后台 Settings→导出/导入导入该文件
+
+# ② 整库备份（含会员/评论）—— 停止 ghost 后拷贝 SQLite 文件
+docker compose stop ghost
+cp runtime/content/data/ghost.db runtime/backups/ghost.db.bak
+docker compose start ghost
+
+# ③ 整库恢复演示：docker compose down -v 后 up（重建空库）→ 停 ghost → 拷回 ghost.db.bak → start
 ```
 
 ## 5. Bug 记录（要求至少 1 条，附修复 commit）

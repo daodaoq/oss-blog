@@ -1,0 +1,6 @@
+Only in theme/assets/css: journal.css
+Only in theme/assets/js: search.js
+Files /tmp/casper-pristine/default.hbs and theme/default.hbs differ
+Files /tmp/casper-pristine/index.hbs and theme/index.hbs differ
+Files /tmp/casper-pristine/package.json and theme/package.json differ
+Files /tmp/casper-pristine/post.hbs and theme/post.hbs differ

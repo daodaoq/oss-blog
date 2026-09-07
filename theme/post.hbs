@@ -10,6 +10,15 @@ into the {body} tag of the default.hbs template --}}
 <main id="site-main" class="site-main">
 <article class="article {{post_class}} {{#match @custom.post_image_style "Full"}}image-full{{else match @custom.post_image_style "=" "Small"}}image-small{{/match}}">
 
+    {{!-- 自研面包屑（二次开发）：首页 / 标签 / 正文 --}}
+    <nav class="mz-breadcrumb gh-canvas" aria-label="Breadcrumb">
+        <a href="{{@site.url}}">{{t "Home"}}</a>
+        {{#if primary_tag}}
+            <span class="sep">/</span><a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+        {{/if}}
+        <span class="sep">/</span><span class="cur">{{t "Article"}}</span>
+    </nav>
+
     <header class="article-header gh-canvas">
 
         <div class="article-tag post-card-tags">
