@@ -153,3 +153,10 @@ docker compose start ghost
 - 首次使用请在后台**修改/设置强密码**并关闭公开注册（`Settings → 会员`)到可控状态再对外；
 - 本仓库为教学/个人演示用途，默认关闭 staff 设备验证与使用本地邮件接收器，**不建议直接公网部署**；
 - 若对外部署，请参考 [Ghost 官方文档](https://ghost.org/docs/config/) 配置真实 SMTP、HTTPS 与备份。
+
+## 十一、开源协作证据（GitHub）
+- 需求与验收以 **Issue 驱动**：#1（基线与验收场景）、#2（自主扩展搜索），见仓库 Issues
+- 功能在 **feature 分支**开发并合并回 `main`（`feature/custom-theme`、`feature/lab-finishing`）
+- 合并前**自我 Code Review 文字记录**：`docs/self-code-review.md`
+- 主题相对上游差异证据：`docs/theme-diff-vs-casper.txt`；主题校验：`docs/gscan-theme-output.txt`
+- 演示与交付：`docs/live-demo.md`、`NOTICE.md`、标签 `v1.0-lab`
