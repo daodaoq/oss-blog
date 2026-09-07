@@ -1,0 +1,67 @@
+{{!< default}}
+{{!-- 杂志首页：头版头条 + 双栏栅格（自研 mz-* 结构，样式见 assets/css/journal.css） --}}
+
+<main id="site-main" class="mz-home outer">
+    <div class="inner">
+
+        {{!-- 头版头条：最新一篇大图展示 --}}
+        {{#foreach posts limit="1"}}
+            <article class="mz-hero">
+                <div class="mz-hero-media">
+                    {{#if feature_image}}
+                        <img src="{{img_url feature_image size="xl"}}"
+                             alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                             fetchpriority="high" loading="eager" />
+                    {{else}}
+                        <div class="mz-hero-fallback">{{@site.title}}</div>
+                    {{/if}}
+                </div>
+                <div class="mz-hero-body">
+                    {{#if primary_tag}}
+                        <span class="mz-kicker">{{primary_tag.name}}</span>
+                    {{/if}}
+                    <h1 class="mz-hero-title"><a href="{{url}}">{{title}}</a></h1>
+                    {{#if excerpt}}
+                        <p class="mz-deck">{{excerpt words="46"}}</p>
+                    {{/if}}
+                    <div class="mz-meta">
+                        <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="YYYY年MM月DD日"}}</time>
+                        {{#if reading_time}}<span>· {{reading_time}}</span>{{/if}}
+                        {{#if @site.comments_enabled}}<span>· {{comment_count}}</span>{{/if}}
+                    </div>
+                </div>
+            </article>
+        {{/foreach}}
+
+        {{!-- 其余文章：双栏栅格 --}}
+        <div class="mz-grid">
+            {{#foreach posts from="2"}}
+                <article class="mz-card">
+                    {{#if feature_image}}
+                        <div class="mz-card-media">
+                            <a href="{{url}}">
+                                <img src="{{img_url feature_image size="m"}}"
+                                     srcset="{{img_url feature_image size="s"}} 300w, {{img_url feature_image size="m"}} 600w, {{img_url feature_image size="l"}} 1000w"
+                                     sizes="(max-width: 900px) 100vw, 560px"
+                                     alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                                     loading="lazy" />
+                            </a>
+                        </div>
+                    {{/if}}
+                    <div class="mz-card-body">
+                        {{#if primary_tag}}<span class="mz-tag">{{primary_tag.name}}</span>{{/if}}
+                        <h2 class="mz-card-title"><a href="{{url}}">{{title}}</a></h2>
+                        {{#if excerpt}}<p class="mz-card-excerpt">{{excerpt words="32"}}</p>{{/if}}
+                        <div class="mz-meta">
+                            <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="YYYY年MM月DD日"}}</time>
+                            {{#if reading_time}}<span>· {{reading_time}}</span>{{/if}}
+                        </div>
+                    </div>
+                </article>
+            {{/foreach}}
+        </div>
+
+        {{pagination}}
+
+    </div>
+</main>

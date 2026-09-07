@@ -1,0 +1,100 @@
+{
+    "name": "sjk-journal",
+    "description": "简洁杂志风主题：基于 Ghost Casper 二次开发，自研首页杂志栅格/站内搜索/导航与页脚",
+    "version": "1.0.0",
+    "engines": {
+        "ghost": ">=5.0.0",
+        "node": ">=22.12.0"
+    },
+    "license": "MIT",
+    "screenshots": {
+        "desktop": "assets/screenshot-desktop.jpg",
+        "mobile": "assets/screenshot-mobile.jpg"
+    },
+    "scripts": {
+        "test": "gscan ."
+    },
+    "author": {
+        "name": "sjk",
+        "url": "https://github.com/daodaoq/oss-blog"
+    },
+    "gpm": {
+        "type": "theme",
+        "categories": [
+            "Minimal",
+            "Magazine"
+        ]
+    },
+    "keywords": [
+        "ghost",
+        "theme",
+        "ghost-theme"
+    ],
+    "config": {
+        "posts_per_page": 12,
+        "image_sizes": {
+            "xxs": { "width": 30 },
+            "xs": { "width": 100 },
+            "s": { "width": 300 },
+            "m": { "width": 600 },
+            "l": { "width": 1000 },
+            "xl": { "width": 2000 }
+        },
+        "card_assets": true,
+        "custom": {
+            "navigation_layout": {
+                "type": "select",
+                "options": [
+                    "Logo on cover",
+                    "Logo in the middle",
+                    "Stacked"
+                ],
+                "default": "Logo on cover"
+            },
+            "color_scheme": {
+                "type": "select",
+                "options": [
+                    "Light",
+                    "Dark",
+                    "Auto"
+                ],
+                "default": "Light"
+            },
+            "feed_layout": {
+                "type": "select",
+                "options": [
+                    "Classic",
+                    "Grid",
+                    "List"
+                ],
+                "default": "Classic",
+                "group": "homepage"
+            },
+            "header_style": {
+                "type": "select",
+                "options": [
+                    "Center aligned",
+                    "Left aligned",
+                    "Hidden"
+                ],
+                "default": "Center aligned",
+                "group": "homepage"
+            },
+            "show_publication_cover": {
+                "type": "boolean",
+                "default": false,
+                "group": "homepage"
+            },
+            "show_recent_posts_footer": {
+                "type": "boolean",
+                "default": false,
+                "group": "post"
+            },
+            "email_signup_text": {
+                "type": "text",
+                "default": "不错过更新，欢迎留言交流。",
+                "group": "post"
+            }
+        }
+    }
+}

@@ -1,0 +1,524 @@
+/*! ============================================================
+   sjk-journal.css —— 简洁杂志风主题样式（二次开发，非 Casper 原样）
+   叠加在 Casper 基础样式(built/screen.css)之后。
+   ============================================================ */
+
+:root {
+    --j-paper: #faf8f5;
+    --j-card: #ffffff;
+    --j-ink: #1a1a1a;
+    --j-ink-soft: #55524d;
+    --j-muted: #8a857d;
+    --j-line: #e7e2da;
+    --j-accent: #c0392b;          /* 杂志红 */
+    --j-accent-ink: #7f1d1d;
+    --j-serif: "Georgia", "Times New Roman", "Songti SC", "SimSun", serif;
+    --j-sans: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    --j-radius: 10px;
+    --j-shadow: 0 1px 2px rgba(26, 26, 26, .04), 0 8px 24px rgba(26, 26, 26, .06);
+}
+
+/* ---------- 基础字体与背景 ---------- */
+body {
+    background: var(--j-paper);
+    color: var(--j-ink);
+    font-family: var(--j-sans);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Ghost/casper 默认正文宽度稍窄，杂志风放宽一点并统一圆角 */
+.gh-canvas,
+.gh-content,
+.gh-pagehead,
+.gh-head-inner,
+.site-main,
+.inner {
+    max-width: 1120px;
+}
+
+/* ============================================================
+   顶部导航（覆盖 Casper gh-head 为杂志式细头）
+   ============================================================ */
+.gh-head {
+    background: var(--j-card);
+    border-bottom: 2px solid var(--j-ink);
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+.gh-head-inner {
+    gap: 18px;
+    padding: 0 24px;
+}
+
+.gh-head-brand .gh-head-logo,
+.gh-head-logo {
+    font-family: var(--j-serif);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: .5px;
+    color: var(--j-ink) !important;
+    text-transform: none;
+}
+
+.gh-head-logo img {
+    max-height: 44px;
+}
+
+/* 菜单链接 */
+.gh-head-menu .nav {
+    gap: 4px;
+}
+
+.gh-head-menu .nav li a,
+.gh-head-menu a {
+    color: var(--j-ink);
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 999px;
+}
+
+.gh-head-menu .nav li a:hover,
+.gh-head-menu a:hover {
+    background: #f1ece4;
+    color: var(--j-accent-ink);
+}
+
+/* 登录/订阅按钮 */
+.gh-head-members .gh-head-button {
+    background: var(--j-ink);
+    border: 0;
+    color: var(--j-paper);
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.gh-head-members .gh-head-button:hover {
+    background: var(--j-accent);
+    color: #fff;
+}
+
+.gh-head-members .gh-head-link {
+    color: var(--j-ink-soft);
+}
+
+/* ============================================================
+   杂志首页（自研结构 mz-*，见 index.hbs）
+   ============================================================ */
+.mz-home {
+    padding: 34px 0 70px;
+}
+
+/* 头条 hero */
+.mz-hero {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    gap: 0;
+    background: var(--j-card);
+    border: 1px solid var(--j-line);
+    border-radius: var(--j-radius);
+    overflow: hidden;
+    box-shadow: var(--j-shadow);
+    margin-bottom: 42px;
+}
+
+.mz-hero-media {
+    position: relative;
+    min-height: 320px;
+    background: linear-gradient(135deg, #ece6db, #e0d8cb);
+}
+
+.mz-hero-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mz-hero-media .mz-hero-fallback {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: var(--j-serif);
+    font-size: 56px;
+    color: rgba(26, 26, 26, .18);
+    letter-spacing: 6px;
+}
+
+.mz-hero-body {
+    padding: 40px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+}
+
+.mz-kicker {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--j-accent);
+}
+
+.mz-hero-body h1,
+.mz-hero-title {
+    font-family: var(--j-serif);
+    font-size: clamp(28px, 3.6vw, 42px);
+    line-height: 1.12;
+    margin: 0;
+    color: var(--j-ink);
+}
+
+.mz-hero-body h1 a,
+.mz-hero-title a {
+    color: inherit;
+}
+
+.mz-hero-body p.mz-deck {
+    color: var(--j-ink-soft);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.mz-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: var(--j-muted);
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.mz-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 12px;
+    border-radius: 999px;
+    background: #f3ece2;
+    color: var(--j-accent-ink);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* 列表 grid */
+.mz-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+}
+
+.mz-card {
+    background: var(--j-card);
+    border: 1px solid var(--j-line);
+    border-radius: var(--j-radius);
+    overflow: hidden;
+    box-shadow: var(--j-shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.mz-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(26, 26, 26, .06), 0 16px 36px rgba(26, 26, 26, .10);
+}
+
+.mz-card-media {
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #ece6db, #dcd3c3);
+}
+
+.mz-card-media a {
+    display: block;
+    height: 100%;
+}
+
+.mz-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.mz-card-body {
+    padding: 20px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.mz-card-title {
+    font-family: var(--j-serif);
+    font-size: 20px;
+    line-height: 1.25;
+    margin: 0;
+}
+
+.mz-card-title a {
+    color: var(--j-ink);
+}
+
+.mz-card-excerpt {
+    color: var(--j-ink-soft);
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.mz-card .mz-meta {
+    margin-top: auto;
+    padding-top: 8px;
+}
+
+/* ============================================================
+   站内搜索（自研，弹层 mz-search）
+   ============================================================ */
+.mz-search {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 12vh 16px 24px;
+    background: rgba(20, 18, 14, .55);
+    backdrop-filter: blur(2px);
+}
+
+.mz-search.is-open {
+    display: flex;
+}
+
+.mz-search-box {
+    width: min(640px, 100%);
+    background: var(--j-card);
+    border-radius: 14px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .25);
+    overflow: hidden;
+}
+
+.mz-search-form {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid var(--j-line);
+    padding: 4px 18px;
+}
+
+.mz-search-icon {
+    color: var(--j-muted);
+    display: grid;
+}
+
+.mz-search-input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: 18px;
+    padding: 16px 8px;
+    color: var(--j-ink);
+    font-family: var(--j-sans);
+}
+
+.mz-search-close {
+    border: 0;
+    background: #f0ece4;
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    color: var(--j-ink-soft);
+    font-size: 16px;
+}
+
+.mz-search-results {
+    max-height: 60vh;
+    overflow: auto;
+    padding: 6px 0;
+}
+
+.mz-search-result {
+    display: block;
+    padding: 12px 22px;
+    border-bottom: 1px solid #f1ede6;
+}
+
+.mz-search-result:hover {
+    background: #f7f3ec;
+}
+
+.mz-search-result .r-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--j-accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.mz-search-result .r-title {
+    font-family: var(--j-serif);
+    font-size: 17px;
+    color: var(--j-ink);
+    margin-top: 2px;
+}
+
+.mz-search-result mark {
+    background: #ffe08a;
+    color: #533e00;
+    border-radius: 3px;
+    padding: 0 2px;
+}
+
+.mz-search-empty {
+    padding: 40px 26px;
+    text-align: center;
+    color: var(--j-ink-soft);
+}
+
+.mz-search-empty strong {
+    display: block;
+    font-family: var(--j-serif);
+    font-size: 20px;
+    color: var(--j-ink);
+    margin-bottom: 8px;
+}
+
+.mz-search-empty .r-hint {
+    font-size: 13px;
+    color: var(--j-muted);
+}
+
+.mz-search-hint {
+    padding: 10px 22px;
+    color: var(--j-muted);
+    font-size: 12px;
+    border-top: 1px solid var(--j-line);
+}
+
+/* ============================================================
+   正文文章（覆盖 Casper 排版细节，更"杂志"）
+   ============================================================ */
+.gh-content {
+    font-family: var(--j-serif);
+}
+
+.gh-content p {
+    font-size: 18px;
+    line-height: 1.85;
+    color: #2c2a27;
+}
+
+.gh-content h2,
+.gh-content h3 {
+    font-family: var(--j-sans);
+    font-weight: 700;
+    color: var(--j-ink);
+}
+
+.gh-content pre,
+.gh-content code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+.gh-content pre {
+    background: #201f1c;
+    color: #e8e6e2;
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-size: 14px;
+    overflow-x: auto;
+}
+
+.gh-content blockquote {
+    border-left: 4px solid var(--j-accent);
+    color: var(--j-ink-soft);
+}
+
+.gh-content img {
+    border-radius: 8px;
+}
+
+/* 文章页头 */
+.gh-article-header {
+    border-bottom: 1px solid var(--j-line);
+}
+
+.gh-article-title {
+    font-family: var(--j-serif);
+    line-height: 1.15;
+}
+
+/* ============================================================
+   页脚
+   ============================================================ */
+.site-footer {
+    background: #201f1c;
+    color: #c9c4bb;
+    border-top: 3px solid var(--j-accent);
+}
+
+.site-footer a,
+.site-footer .nav a {
+    color: #d8d3c9;
+}
+
+.site-footer .copyright a {
+    color: #fff;
+    font-family: var(--j-serif);
+}
+
+/* ============================================================
+   分页 / 通用
+   ============================================================ */
+.pagination {
+    margin-top: 40px;
+    font-family: var(--j-sans);
+}
+
+a {
+    color: var(--j-accent-ink);
+}
+
+::selection {
+    background: #ffe08a;
+}
+
+/* ============================================================
+   响应式（窄屏）
+   ============================================================ */
+@media (max-width: 900px) {
+    .mz-hero {
+        grid-template-columns: 1fr;
+    }
+    .mz-hero-media {
+        min-height: 220px;
+    }
+    .mz-hero-body {
+        padding: 26px 24px;
+    }
+    .mz-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 620px) {
+    .gh-head-inner {
+        padding: 0 16px;
+    }
+    .mz-home {
+        padding: 20px 0 50px;
+    }
+    .mz-card-title {
+        font-size: 18px;
+    }
+}
