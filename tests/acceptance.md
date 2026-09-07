@@ -86,6 +86,13 @@ docker compose start ghost
 - 处理：本地关设备验证 + 自建 mail-sink（commit 见 compose 变更），登录恢复 201
 - 结论：已解决
 
+### BUG-003：站点标题/标签页乱码（Windows 控制台编码）
+- 现象：前台标签页/首页标题显示 `sjk �Ŀ�Դ����`（中文被存成含 U+FFFD 非法字符）
+- 原因：Windows 控制台按 GBK 编码，用 curl 创建 owner 时提交的中文 blogTitle 被错误写入数据库
+- 处理：`node scripts/fix-site-settings.js` 以 UTF-8 重写 title/description/meta/newsletter 名
+- 验证：标题字节恢复合法 UTF-8（无 U+FFFD）；标签页 = `二次开发 - sjk 的开源博客`
+- 结论：已解决（幂等脚本，可重复执行）
+
 ## 6. 记录口径与可选现场复核
 - 本实验**未提供浏览器截图**：可脚本化用例均以 API/结构/行为验证给出 `PASS` 并留痕；
   视觉项（U1–U4）按"结构验证通过 + 建议现场演示复核"记录，不虚构视觉证据。
