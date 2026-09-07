@@ -1,6 +1,9 @@
 # GitHub Issue 文案（任务1 / 任务6）
 
-> 在网页仓库（github.com/daodaoq/oss-blog）按模板粘贴创建，创建后把编号回填到本文件顶部并通知我，我会在 PR 描述里 `Closes #N` 关联。
+> 创建状态（已创建）：
+> - Issue #1 实验01 基线：选择 Ghost 6.62.0 …（open）
+> - Issue #2 自主扩展：站内全文搜索 …（open）
+> - PR #3 误建（方向反转 head=main→base=feature/custom-theme），将替换为正确 PR。
 
 ## Issue #1 · 基线选型与固定版本（任务1）
 **标题**：实验01 基线：选择 Ghost 6.62.0 作为二次开发基线（Docker Compose 本地运行）
