@@ -415,6 +415,9 @@ body {
     align-items: center;
     font-size: 13px;
     color: var(--j-muted);
+    /* 与文章标题/正文的阅读栏对齐：主栏约 720px 并水平居中 */
+    width: min(720px, calc(100% - 2 * max(4vmin, 20px)));
+    margin: 0 auto;
     padding-top: 34px;
     margin-bottom: -10px;
 }
