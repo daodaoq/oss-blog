@@ -43,11 +43,13 @@ services:
       retries: 12
       start_period: 30s
 
-  # 本地邮件接收器：极简 SMTP sink（自建镜像，无需第三方网络，构建自 docker/Dockerfile）
+  # 本地邮件接收器：SMTP 收信 + 网页收件箱（自建镜像，构建自 mail-sink/Dockerfile）
   mail-sink:
     build: ./mail-sink
     image: oss-blog-mail-sink:local
     container_name: oss-blog-mail-sink
     restart: unless-stopped
+    ports:
+      - "8025:8025"   # 网页收件箱（解码后的验证码/登录链接，见 README）
     volumes:
       - ./mail:/mail
