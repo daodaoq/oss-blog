@@ -40,3 +40,5 @@ theme/node_modules/
 theme/.cache/
 runtime/.admin.env
 runtime/ghost-keys.env
+tools/
+runtime/backups/
